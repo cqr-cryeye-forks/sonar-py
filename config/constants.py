@@ -1,1 +1,1 @@
-sonarqube_link = 'http://localhost:9000'
+sonarqube_url = 'http://localhost:9000'
