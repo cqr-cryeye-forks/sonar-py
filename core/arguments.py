@@ -5,7 +5,7 @@ from config.constants import sonarqube_url
 
 
 def create_parser():
-    parser = argparse.ArgumentParser(description='Broken Minecraft seeds finder')
+    parser = argparse.ArgumentParser(description='SonarQube API adapter')
     parser.add_argument('-u', '--url', type=str, default=sonarqube_url,
                         help=f'SonarQube link. Default is {sonarqube_url}')
     parser.add_argument('-l', '--login', type=str, default=None,
@@ -17,7 +17,7 @@ def create_parser():
     parser.add_argument('-n', '--project', type=str, default=None,
                         help='Target SonarQube project')
     parser.add_argument('-s', '--scan', type=str, default=Path(__file__).parents[1],
-                        help='Scan folder for analyzing')
+                        help='Scan folder for analyzing. Default is this script folder')
     parser.add_argument('-o', '--output', type=str, default=None,
                         help='Output file for data')
     parser.add_argument('-j', '--json', default=False, action='store_true',
