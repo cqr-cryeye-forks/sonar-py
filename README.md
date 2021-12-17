@@ -8,4 +8,4 @@ Script has this logic:
 3) Run local program (sonar-scaner) for starting analyzing
 4) Get founded issues from API
 5) Print or save founded data
-6) Delete project is needed
+6) Delete project if needed
