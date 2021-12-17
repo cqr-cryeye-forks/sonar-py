@@ -19,6 +19,8 @@ def create_parser():
                         help='Output file for data')
     parser.add_argument('-j', '--json', default=False, action='store_true',
                         help='Data as json')
+    parser.add_argument('-d', '--delete', default=False, action='store_true',
+                        help='Remove project in the end')
     return parser.parse_args()
 
 
