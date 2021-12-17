@@ -5,6 +5,7 @@ from core.export import export_issues
 from core.projects import get_project
 from core.projects.delete_project import delete_project
 from core.projects.get_issues import get_issues
+from core.sonar_scanner import run_scanner
 
 
 def main():
@@ -12,13 +13,12 @@ def main():
     sonar = init_sonar()
     token = arguments.token
     target_path = arguments.scan
+    target_project = get_project(sonar=sonar, project_name=arguments.project)
     need_to_delete_token = False
     if not token:
         token = generate_new_token(sonar=sonar, token_name=target_project['key'])['token']
         need_to_delete_token = True
     print(f'Path for scanning: {target_path}')
-    target_project = get_project(sonar=sonar, project_name=arguments.project)
-
     run_scanner(target_project=target_project['name'], token=token, target_path=target_path)
     issues = get_issues(sonar=sonar, project=target_project)
     export_issues(issues=issues)

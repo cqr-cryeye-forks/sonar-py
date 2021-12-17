@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from config.constants import sonarqube_url
 
@@ -13,9 +14,11 @@ def create_parser():
                         help='SonarQube password')
     parser.add_argument('-t', '--token', type=str, default=None,
                         help='SonarQube token')
-    parser.add_argument('-n', '--project', type=str,  default=None,
+    parser.add_argument('-n', '--project', type=str, default=None,
                         help='Target SonarQube project')
-    parser.add_argument('-o', '--output', type=str,  default=None,
+    parser.add_argument('-s', '--scan', type=str, default=Path(__file__).parents[1],
+                        help='Scan folder for analyzing')
+    parser.add_argument('-o', '--output', type=str, default=None,
                         help='Output file for data')
     parser.add_argument('-j', '--json', default=False, action='store_true',
                         help='Data as json')
