@@ -3,7 +3,7 @@ from core.account.tokens import generate_new_token, delete_token
 from core.authenticate import init_sonar
 from core.export import export_issues
 from core.projects import get_project
-from core.projects.delete_project import delete_project
+from core.projects.delete_project import delete_project, clean_whitebox_projects
 from core.projects.get_issues import get_issues
 from core.sonar_scanner import run_scanner
 
@@ -11,6 +11,7 @@ from core.sonar_scanner import run_scanner
 def main():
     print(f'Sonar link: {arguments.url}')
     sonar = init_sonar()
+    clean_whitebox_projects(sonar=sonar)
     token = arguments.token
     target_path = arguments.scan
     target_project = get_project(sonar=sonar, project_name=arguments.project)
