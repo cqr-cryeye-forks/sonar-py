@@ -1,8 +1,10 @@
 # sonar-py
-Small adapter for <a href="https://github.com/shijl0925/python-sonarqube-api">shijl0925/python-sonarqube-api</a> for using library as script
+This tool allows you to automate tasks with SonarQube or add it to your pipeline. It will connect with SonarQube API and use local sonar-client app for scanning selected folder.
+
+For connecting with SonarQube tool uses <a href="https://github.com/shijl0925/python-sonarqube-api">shijl0925/python-sonarqube-api</a>.
 
 ## How it works
-Script has this logic:  
+Script logic is:  
 1) get existing project or create new if not found
 2) Generate configuration file if needed
 3) Run local program (sonar-scaner) for starting analyzing
@@ -27,11 +29,15 @@ optional arguments:
   -t TOKEN, --token TOKEN
                         SonarQube token
   -n PROJECT, --project PROJECT
-                        Target SonarQube project
+                        Target SonarQube project. If not selected - tool will generate new.
   -s SCAN, --scan SCAN  Scan folder for analyzing. Default is this script
                         folder
   -o OUTPUT, --output OUTPUT
                         Output file for data
   -j, --json            Data as json
   -d, --delete          Remove project in the end
+  -r, --remove_old      Remove other generated projects before run
+  -dt DELETE_TIME, --delete-time DELETE_TIME
+                        Days that other generated project will be kept.
+                        Default 30
 ```

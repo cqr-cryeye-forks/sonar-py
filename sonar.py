@@ -11,7 +11,10 @@ from core.sonar_scanner import run_scanner
 def main():
     print(f'Sonar link: {arguments.url}')
     sonar = init_sonar()
-    clean_whitebox_projects(sonar=sonar)
+    if arguments.remove_old:
+        clean_whitebox_projects(sonar=sonar, delete_age=arguments.delete_time)
+    else:
+        print('Cleaning old projects skipped.')
     token = arguments.token
     target_path = arguments.scan
     target_project = get_project(sonar=sonar, project_name=arguments.project)
