@@ -20,9 +20,9 @@ def main():
         token = generate_new_token(sonar=sonar, token_name=target_project['key'])['token']
         need_to_delete_token = True
     print(f'Path for scanning: {target_path}')
-    run_scanner(target_project=target_project['name'], token=token, target_path=target_path)
+    errors = run_scanner(target_project=target_project['name'], token=token, target_path=target_path)
     issues = get_issues(sonar=sonar, project=target_project)
-    export_issues(issues=issues)
+    export_issues(issues=issues, errors=errors)
     if need_to_delete_token:
         delete_token(sonar=sonar, token_name=target_project['key'])
     if arguments.delete:
