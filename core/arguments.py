@@ -16,6 +16,8 @@ def create_parser():
                         help='SonarQube token')
     parser.add_argument('-n', '--project', type=str, default=None,
                         help='Target SonarQube project. If not selected - tool will generate new.')
+    parser.add_argument('-i', '--issues-type', type=str, default='VULNERABILITY',
+                        help='Type of issues to return.')
     parser.add_argument('-s', '--scan', type=str, default=Path(__file__).parents[1],
                         help='Scan folder for analyzing. Default is this script folder')
     parser.add_argument('-o', '--output', type=str, default=None,
@@ -24,7 +26,7 @@ def create_parser():
                         help='Data as json')
     parser.add_argument('-d', '--delete', default=False, action='store_true',
                         help='Remove project in the end')
-    parser.add_argument('-r', '--remove_old', default=False, action='store_true',
+    parser.add_argument('-r', '--remove-old', default=False, action='store_true',
                         help='Remove other generated projects before run')
     parser.add_argument('-dt', '--delete-time', type=int, default=30,
                         help='Days that other generated project will be kept. Default 30')

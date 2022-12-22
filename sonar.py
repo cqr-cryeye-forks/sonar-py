@@ -29,7 +29,7 @@ def main():
     errors = run_scanner(target_project=target_project['name'], token=token, target_path=target_path)
     print('Wait a bit for results')
     sleep(30)
-    issues = get_issues(sonar=sonar, project=target_project, )
+    issues = get_issues(sonar=sonar, project=target_project, issues_type=arguments.issues_type)
     scan_data, errors_ = get_results(project=target_project, token=token, sonar_url=arguments.url.removesuffix('/'))
     errors.extend(errors_)
     export_issues(issues=issues, errors=errors, scan_data=scan_data)
