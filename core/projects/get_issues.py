@@ -3,7 +3,7 @@ from sonarqube import SonarQubeClient
 
 def get_issues(sonar: SonarQubeClient, project: dict, issues_type: str) -> list[dict]:
     issues = list(sonar.issues.search_issues(
-        id=project['key'],
+        componentKeys=project['key'],
         s="SEVERITY",
         types=issues_type
     ))

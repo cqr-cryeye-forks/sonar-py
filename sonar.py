@@ -1,5 +1,3 @@
-from time import sleep
-
 from core import arguments
 from core.account.tokens import generate_new_token, delete_token
 from core.authenticate import init_sonar
@@ -9,6 +7,7 @@ from core.projects.delete_project import delete_project, clean_whitebox_projects
 from core.projects.get_issues import get_issues
 from core.projects.get_results import get_results
 from core.sonar_scanner import run_scanner
+from core.utils.background_task_check import wait_until_all_background_tasks_finish
 
 
 def main():
@@ -27,10 +26,12 @@ def main():
         need_to_delete_token = True
     print(f'Path for scanning: {target_path}')
     errors = run_scanner(target_project=target_project['name'], token=token, target_path=target_path)
-    print('Wait a bit for results')
-    sleep(30)
+    background_errors = wait_until_all_background_tasks_finish(project=target_project,
+                                                               token=token,
+                                                               sonar_url=arguments.url.removesuffix('/'))
     issues = get_issues(sonar=sonar, project=target_project, issues_type=arguments.issues_type)
     scan_data, errors_ = get_results(project=target_project, token=token, sonar_url=arguments.url.removesuffix('/'))
+    errors.extend(background_errors)
     errors.extend(errors_)
     export_issues(issues=issues, errors=errors, scan_data=scan_data)
     if need_to_delete_token:

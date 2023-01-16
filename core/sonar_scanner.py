@@ -45,7 +45,7 @@ def run_scanner(target_project: str, token: str, target_path: str) -> list[str]:
             else:
                 errors_list.append(f"Can't check results. Error code: {link_data.status_code}")
 
-        print("Errors:")
+        print("Errors:" if errors_list else 'No errors during analyze.')
         for err in errors_list:
             print(err)
         return errors_list
